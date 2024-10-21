@@ -17,7 +17,8 @@ def generate_fps(data_path):
                 json_data = modules.load_json(json_file)
                 input_output_files = modules.get_input_output_files(folder_path)
                 if input_output_files:
-                    item = generate_item_from_json(json_data, input_output_files)
+                    # 添加 folder_name 作为第三个参数传递给 generate_item_from_json
+                    item = generate_item_from_json(json_data, input_output_files, folder_name)
                     fps.append(item)
 
     return fps

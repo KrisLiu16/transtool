@@ -8,6 +8,39 @@ def prettify(elem):
     pretty_xml = reparsed.toprettyxml(indent="  ")
     return f'<?xml version="1.0" encoding="UTF-8"?>\n' + '\n'.join(pretty_xml.splitlines()[1:])
 
+
 def replace_html_entities(xml_string):
-    """Replace HTML entities with their original characters."""
-    return xml_string.replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&")
+    """替换所有HTML转义字符为其原始字符."""
+    replacements = {
+        "&quot;": '"',
+        "&apos;": "'",
+        "&lt;": "<",
+        "&gt;": ">",
+        "&amp;": "&",
+        "&nbsp;": " ",
+        "&cent;": "¢",
+        "&pound;": "£",
+        "&yen;": "¥",
+        "&euro;": "€",
+        "&copy;": "©",
+        "&reg;": "®",
+        "&trade;": "™",
+        "&bull;": "•",
+        "&hellip;": "…",
+        "&mdash;": "—",
+        "&ndash;": "–",
+        "&lsquo;": "‘",
+        "&rsquo;": "’",
+        "&ldquo;": "“",
+        "&rdquo;": "”",
+        "&tilde;": "˜",
+        "&mdash;": "—",
+        "&nbsp;": " ",
+        # 可以根据需要添加更多转义字符
+    }
+
+    for escaped, original in replacements.items():
+        xml_string = xml_string.replace(escaped, original)
+
+    return xml_string
+
